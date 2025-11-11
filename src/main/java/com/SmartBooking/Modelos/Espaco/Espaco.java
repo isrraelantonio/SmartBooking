@@ -1,6 +1,8 @@
 package com.SmartBooking.Modelos.Espaco;
 import com.SmartBooking.Modelos.Endereco.Endereco;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Table;
 import lombok.*;
 
@@ -13,7 +15,7 @@ import lombok.*;
 @EqualsAndHashCode(of = "id")
 public class Espaco {
 
-    @Gene
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
     private String email;
