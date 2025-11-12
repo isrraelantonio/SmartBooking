@@ -48,7 +48,7 @@ Representa as salas ou ambientes que podem ser reservados.
 | `tipo de ambiente` | String |que tipo lugar é |
 | `endereco` | Endereco | Informações de endereço |
 | `andar` | String |andar da sala  |
-| `Referencia` | String | Pontos de referência para identificaçaõ do local |
+| `Referencia` | String | Ponto de referência para identificaçaõ do local |
 | `disponivel` | Boolean | Indica se o espaço está disponível |
 
 ---
@@ -110,9 +110,12 @@ spring.jpa.properties.hibernate.format_sql=true
 spring.jpa.show-sql=true
 
 ```
-${DB_NAME3} | NOME DO BANCO DE DADOS
-${DB_SENHA} | SENHA DO BANCO DE DADOS
-${DB_USARIO} | NOME DE USUÁRIO
+| Variável | Descrição |
+|-----------|------------|
+| `${DB_NAME3}` | Nome do banco de dados |
+| `${DB_SENHA}` | Senha do banco de dados |
+| `${DB_USUARIO}` | Nome de usuário |
+
 ---
 
 ## 🧪 Testes
