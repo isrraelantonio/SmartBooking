@@ -30,7 +30,7 @@ public class Reserva {
 
     private LocalDateTime dataInicio;
     private LocalDateTime dataFim;
-    
+
     @Enumerated(EnumType.STRING)
     private StatusConfirmacao statusConfirmacao;
 }
