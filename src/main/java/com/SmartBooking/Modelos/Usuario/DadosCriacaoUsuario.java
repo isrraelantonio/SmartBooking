@@ -10,8 +10,6 @@ public record DadosCriacaoUsuario(
          @NotNull
          String email,
          @NotNull
-         String senha,
-         @NotNull
-         Perfil perfil
+         String senha
 ) {
 }
