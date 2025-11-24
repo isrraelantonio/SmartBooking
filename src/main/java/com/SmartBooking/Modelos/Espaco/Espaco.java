@@ -1,9 +1,6 @@
 package com.SmartBooking.Modelos.Espaco;
 import com.SmartBooking.Modelos.Endereco.Endereco;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity(name = "Espaco")
@@ -14,13 +11,15 @@ import lombok.*;
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class Espaco {
-
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
     private String email;
     private Integer capacidade;
-    private String tipodeAmbiente;
+    private String ambiente;
+    @ManyToOne
+    @JoinColumn(name = "endereco_id")
     private Endereco endereco;
     private String andar;
     private String referencia;

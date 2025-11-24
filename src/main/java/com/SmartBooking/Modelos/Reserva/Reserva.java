@@ -28,9 +28,9 @@ public class Reserva {
     @JoinColumn(name = "espaco_id")
     private Espaco espaco;
 
-    private LocalDateTime dataInicio;
-    private LocalDateTime dataFim;
+    private LocalDateTime inicio;
+    private LocalDateTime fim;
 
     @Enumerated(EnumType.STRING)
-    private StatusConfirmacao statusConfirmacao;
+    private StatusConfirmacao status;
 }
