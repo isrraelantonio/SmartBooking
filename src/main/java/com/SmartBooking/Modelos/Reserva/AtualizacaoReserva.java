@@ -10,8 +10,8 @@ public record AtualizacaoReserva(
          Long id,
          Long usuarioId,
          Long espacoId,
-         LocalDateTime dataInicio,
-         LocalDateTime dataFim,
-         StatusConfirmacao statusConfirmacao
+         LocalDateTime inicio,
+         LocalDateTime fim,
+         StatusConfirmacao status
 ) {
 }
