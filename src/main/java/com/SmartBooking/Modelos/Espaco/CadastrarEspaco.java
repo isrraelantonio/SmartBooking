@@ -13,8 +13,8 @@ public record CadastrarEspaco(
          Integer capacidade,
          @NotNull
          String tipodeAmbiente,
-         @NotNull @Valid
-         Endereco endereco,
+         @NotNull
+         Long endereco,
          @NotNull
          String andar,
          @NotNull

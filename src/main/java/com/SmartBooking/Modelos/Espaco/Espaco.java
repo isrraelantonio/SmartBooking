@@ -1,6 +1,8 @@
 package com.SmartBooking.Modelos.Espaco;
+import com.SmartBooking.Modelos.Endereco.DadosEndereco;
 import com.SmartBooking.Modelos.Endereco.Endereco;
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import lombok.*;
 
 @Entity(name = "Espaco")
@@ -24,5 +26,17 @@ public class Espaco {
     private String andar;
     private String referencia;
     private Boolean disponivel = true;
+
+
+    public Espaco(CadastrarEspaco dados, Endereco endereco){
+        this.nome = dados.nome();
+        this.email = dados.email();
+        this.capacidade = dados.capacidade();
+        this.ambiente = dados.tipodeAmbiente();
+        this.endereco = endereco;
+        this.andar = dados.andar();
+        this.referencia = dados.referencia();
+
+    }
 
 }
