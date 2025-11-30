@@ -1,6 +1,7 @@
 package com.SmartBooking.Controller;
 
 import com.SmartBooking.Modelos.Usuario.*;
+import com.SmartBooking.servicos.ServicosUsuario;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,39 +15,28 @@ public class UsuarioController {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @Autowired
+    private ServicosUsuario servicosUsuario;
+
     @PostMapping
     @Transactional
     public ResponseEntity cadastrarUsuario(@RequestBody @Valid DadosCriacaoUsuario dados, UriComponentsBuilder uribilder) {
-
-        if (usuarioRepository.existsByEmail(dados.email())) {
-            return ResponseEntity.badRequest().body("Esse E-mail já está cadastrado");
-        } else {
-            var usuario = new Usuario(dados);
-            usuarioRepository.save(usuario);
-            var uri = uribilder.path("/usuario/{id}").buildAndExpand(usuario.getId()).toUri();
-            return ResponseEntity.created(uri).body(new DadosDetalhamentoUsuario(usuario));
-        }
+        var dto = servicosUsuario.criarUsuario(dados, uribilder);
+        return dto;
     }
 
     @PutMapping
     @Transactional
     public ResponseEntity atualizarUsuario(@RequestBody @Valid DadosAtualizacaoDoUsuario dados) {
-        if (usuarioRepository.existsByEmail(dados.email())) {
-            return ResponseEntity.badRequest().body("Esse E-mail já está cadastrado");
-        } else {
-            var usuario = usuarioRepository.getReferenceById(dados.id());
-            usuario.atulizarDados(dados);
-            return ResponseEntity.ok("Usuário atualizado com sucesso!");
-
-        }
+       var dto = servicosUsuario.atualizarUsuario(dados);
+       return  dto;
     }
 
     @DeleteMapping("/{id}")
     @Transactional
     public ResponseEntity excluirUsuario(@PathVariable Long id) {
-        var usuario = usuarioRepository.getReferenceById(id);
-        usuario.excluir();
-        return ResponseEntity.noContent().build();
+       var dto = servicosUsuario.excluirUsuario(id);
+       return  dto;
     }
 
 }
