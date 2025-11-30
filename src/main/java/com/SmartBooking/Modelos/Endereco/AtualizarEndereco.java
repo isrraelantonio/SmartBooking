@@ -7,6 +7,7 @@ public record AtualizarEndereco(
         Long id,
         String estado,
         String cidade,
+        String cep,
         String rua,
         Integer numero
 ) {

@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS enderecos (
     id BIGINT NOT NULL AUTO_INCREMENT,
     estado VARCHAR(255) NOT NULL,
     cidade VARCHAR(50),
-    complemento VARCHAR(255),
+    cep VARCHAR(255),
     rua VARCHAR(255),
     numero INT,
     PRIMARY KEY (id)

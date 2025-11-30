@@ -9,6 +9,8 @@ public record DadosEndereco(
          @NotNull
          String cidade,
          @NotNull
+         String cep,
+         @NotNull
          String rua,
          @NotNull
          Integer numero
