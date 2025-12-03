@@ -20,11 +20,10 @@ public class ServicosEspaco {
     @Autowired
     public EspacoRepository espacoRepository;
 
-    public ResponseEntity<DadosDetalhamentoEspaco> criacaoEspaco(CadastrarEspaco dados, UriComponentsBuilder uribilder) {
+    public DadosDetalhamentoEspaco criacaoEspaco(CadastrarEspaco dados) {
 
         if (!enderecoRepository.existsById(dados.endereco())) {
             throw new ValidacaoException("id do endereco não existe!");
-
         }
         if (dados.capacidade() <= 20) {
             throw new ValidacaoException("Só aceitamos espaços que comportem 20 ou mais pessoas");
@@ -35,7 +34,8 @@ public class ServicosEspaco {
         var endereco = enderecoRepository.getReferenceById(dados.endereco());
         var espaco = new Espaco(dados, endereco);
         espacoRepository.save(espaco);
-        var uri = uribilder.path("/espaco/{id}").buildAndExpand(espaco.getId()).toUri();
-        return ResponseEntity.created(uri).body(new DadosDetalhamentoEspaco(espaco));
+
+        return  new DadosDetalhamentoEspaco(espaco);
+
     }
 }

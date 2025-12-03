@@ -19,8 +19,9 @@ public class EspacoController {
     @PostMapping
     @Transactional
     public ResponseEntity cadastrarEspaco(@RequestBody @Valid CadastrarEspaco dados, UriComponentsBuilder uribilder) {
-            var dto = servicosEspaco.criacaoEspaco(dados, uribilder);
-            return dto;
+            var dto = servicosEspaco.criacaoEspaco(dados);
+            var uri = uribilder.path("/espaco/{id}").buildAndExpand(dto.Id()).toUri();
+            return ResponseEntity.created(uri).body(dto);
         }
     }
 

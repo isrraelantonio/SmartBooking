@@ -21,22 +21,23 @@ public class UsuarioController {
     @PostMapping
     @Transactional
     public ResponseEntity cadastrarUsuario(@RequestBody @Valid DadosCriacaoUsuario dados, UriComponentsBuilder uribilder) {
-        var dto = servicosUsuario.criarUsuario(dados, uribilder);
-        return dto;
+        var dto = servicosUsuario.criarUsuario(dados);
+        var uri = uribilder.path("/usuario/{id}").buildAndExpand(dto.id()).toUri();
+        return ResponseEntity.created(uri).body(dto);
     }
 
     @PutMapping
     @Transactional
     public ResponseEntity atualizarUsuario(@RequestBody @Valid DadosAtualizacaoDoUsuario dados) {
        var dto = servicosUsuario.atualizarUsuario(dados);
-       return  dto;
+       return ResponseEntity.ok(dto);
     }
 
     @DeleteMapping("/{id}")
     @Transactional
     public ResponseEntity excluirUsuario(@PathVariable Long id) {
-       var dto = servicosUsuario.excluirUsuario(id);
-       return  dto;
+        servicosUsuario.excluirUsuario(id);
+       return ResponseEntity.noContent().build();
     }
 
 }
