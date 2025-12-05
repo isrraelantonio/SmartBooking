@@ -1,4 +1,4 @@
-package com.SmartBooking.validacao;
+package com.SmartBooking.exceções;
 
 public class ValidacaoException extends RuntimeException {
     public ValidacaoException(String mensagem) {

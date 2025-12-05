@@ -1,4 +1,4 @@
-package com.SmartBooking.validacao;
+package com.SmartBooking.exceções;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
