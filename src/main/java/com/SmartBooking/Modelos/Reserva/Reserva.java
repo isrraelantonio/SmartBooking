@@ -32,5 +32,16 @@ public class Reserva {
     private LocalDateTime fim;
 
     @Enumerated(EnumType.STRING)
-    private StatusConfirmacao status;
+    private StatusConfirmacao status = StatusConfirmacao.PENDENTE;
+
+    private String observacao = "";
+
+
+    public Reserva(DadosCriarReserva dados, Usuario usuario, Espaco espaco) {
+        this.usuario = usuario;
+        this.espaco = espaco;
+        this.inicio = dados.inicio();
+        this.fim = dados.fim();
+    }
+
 }
