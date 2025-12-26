@@ -16,12 +16,29 @@ public class EspacoController {
     @Autowired
     public ServicosEspaco servicosEspaco;
 
+
     @PostMapping
     @Transactional
     public ResponseEntity cadastrarEspaco(@RequestBody @Valid CadastrarEspaco dados, UriComponentsBuilder uribilder) {
             var dto = servicosEspaco.criacaoEspaco(dados);
             var uri = uribilder.path("/espaco/{id}").buildAndExpand(dto.Id()).toUri();
             return ResponseEntity.created(uri).body(dto);
-        }
     }
 
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity excluirUsuario(@PathVariable Long id) {
+        servicosEspaco.desativarEspaco(id);
+        return ResponseEntity.noContent().build();
+    }
+
+
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity ativarespaco(@PathVariable Long id) {
+        servicosEspaco.ativarEspaco(id);
+        return ResponseEntity.noContent().build();
+    }
+
+
+    }
