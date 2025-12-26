@@ -1,7 +1,7 @@
 package com.SmartBooking.servicos;
 
 import com.SmartBooking.Modelos.Usuario.*;
-import com.SmartBooking.validacao.ValidacaoException;
+import com.SmartBooking.exceções.ValidacaoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
