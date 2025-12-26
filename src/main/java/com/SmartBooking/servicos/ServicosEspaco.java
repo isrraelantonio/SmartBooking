@@ -2,15 +2,10 @@ package com.SmartBooking.servicos;
 
 
 import com.SmartBooking.Modelos.Endereco.EnderecoRepository;
-import com.SmartBooking.Modelos.Espaco.CadastrarEspaco;
-import com.SmartBooking.Modelos.Espaco.DadosDetalhamentoEspaco;
-import com.SmartBooking.Modelos.Espaco.Espaco;
-import com.SmartBooking.Modelos.Espaco.EspacoRepository;
-import com.SmartBooking.validacao.ValidacaoException;
+import com.SmartBooking.Modelos.Espaco.*;
+import com.SmartBooking.exceções.ValidacaoException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.util.UriComponentsBuilder;
 
 @Service
 public class ServicosEspaco {
@@ -37,5 +32,26 @@ public class ServicosEspaco {
 
         return  new DadosDetalhamentoEspaco(espaco);
 
+    }
+
+
+    public void desativarEspaco(long id) {
+        var espaco = espacoRepository.existeEspaco(id);
+        if(espaco != null){
+            espaco.desativarespaco();
+            espacoRepository.save(espaco);
+        }else{
+            throw new ValidacaoException("Esse espaço já se encontra desativado ou não existe em nosso banco de dados.");
+        }
+    }
+
+    public void ativarEspaco(long id) {
+        var espaco = espacoRepository.existeEspacoDesativado(id);
+        if(espaco != null){
+            espaco.ativarespaco();
+            espacoRepository.save(espaco);
+        }else{
+            throw new ValidacaoException("Esse espaço já se encontra ativo ou não existe em nosso banco de dados.");
+        }
     }
 }
