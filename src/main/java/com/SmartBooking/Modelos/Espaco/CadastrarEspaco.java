@@ -4,6 +4,8 @@ import com.SmartBooking.Modelos.Endereco.Endereco;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 
+import java.time.LocalTime;
+
 public record CadastrarEspaco(
          @NotNull
          String nome,
@@ -18,6 +20,10 @@ public record CadastrarEspaco(
          @NotNull
          String andar,
          @NotNull
-         String referencia
+         String referencia,
+         @NotNull
+         LocalTime abertura,
+         @NotNull
+         LocalTime fechamento
 ) {
 }
