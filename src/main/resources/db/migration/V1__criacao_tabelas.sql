@@ -24,6 +24,9 @@ CREATE TABLE IF NOT EXISTS espacos (
     andar VARCHAR(255) NOT NULL,
     referencia VARCHAR(255) NOT NULL,
     disponivel BOOLEAN NOT NULL DEFAULT TRUE,
+    abertura TIME NOT NULL,
+    fechamento TIME NOT NULL,
+
     PRIMARY KEY (id),
     CONSTRAINT fk_espaco_endereco
         FOREIGN KEY (endereco_id)
@@ -54,7 +57,8 @@ CREATE TABLE IF NOT EXISTS reservas (
     espaco_id BIGINT NOT NULL,
     inicio DATETIME NOT NULL,
     fim DATETIME NOT NULL,
-    status VARCHAR(50) NOT NULL,
+    status VARCHAR(50) DEFAULT 'PENDENTE',
+    observacao VARCHAR(200) DEFAULT '',
     PRIMARY KEY (id),
     CONSTRAINT fk_reserva_usuario
         FOREIGN KEY (usuario_id)
