@@ -1,21 +1,20 @@
-package com.SmartBooking.Modelos.Reserva.Validacoes;
+package com.SmartBooking.Modelos.Reserva.Validators;
 
 
-import com.SmartBooking.Modelos.Reserva.DadosCriarReserva;
-import com.SmartBooking.exceções.ValidacaoException;
+import com.SmartBooking.exception.ValidacaoException;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 
-@Order(4)
+@Order(5)
 @Component
-public class ValidacaoReservaDistante implements ValidarAgendamentoDeReserva{
+public class ValidadorTempoMaximoCriacaoReserva extends ValidadorBaseReserva {
     @Override
-    public void validarReserva(DadosCriarReserva dados) {
+    public void executarValidacao(DadosAgendamentoReserva dados) {
         var data = LocalDate.now();
         var dataLimite = data.plusDays(30);
 
-        if(dados.inicio().toLocalDate().isAfter(dataLimite)){
+        if(dados.getInicio().toLocalDate().isAfter(dataLimite)){
             throw new ValidacaoException("Só podemos registrar reservas com antecedência de 30 dias, não mais que isso.");
 
         }
