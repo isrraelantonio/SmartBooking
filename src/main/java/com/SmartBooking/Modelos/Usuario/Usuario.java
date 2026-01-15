@@ -1,12 +1,11 @@
 package com.SmartBooking.Modelos.Usuario;
 
 import com.SmartBooking.Modelos.Reserva.Reserva;
+import com.SmartBooking.Modelos.Usuario.dto.AtualizacaoUsuarioDTO;
+import com.SmartBooking.Modelos.Usuario.dto.DadosCriacaoUsuarioDTO;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import lombok.*;
-import org.hibernate.annotations.Cascade;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +27,7 @@ public class Usuario {
     private String email;
     private String senha;
     @Enumerated(EnumType.STRING)
-    private Perfil perfil = Perfil.USUARIO;
+    private PerfisUsuario perfil = PerfisUsuario.USUARIO;
     private Boolean ativo = true;
 
 
@@ -36,14 +35,14 @@ public class Usuario {
     private List<Reserva> reservas = new ArrayList<>();
 
 
-    public Usuario(@Valid DadosCriacaoUsuario dados) {
+    public Usuario(@Valid DadosCriacaoUsuarioDTO dados) {
         this.nome = dados.nome();
         this.email = dados.email();
         this.senha = dados.senha();
 
     }
 
-    public void atulizarDados(@Valid DadosAtualizacaoDoUsuario dados) {
+    public void atulizarDados(@Valid AtualizacaoUsuarioDTO dados) {
         if(dados.nome() != null){
             this.nome = dados.nome();
         }
