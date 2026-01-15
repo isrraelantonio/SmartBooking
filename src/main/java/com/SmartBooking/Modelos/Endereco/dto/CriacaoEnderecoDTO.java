@@ -1,8 +1,8 @@
-package com.SmartBooking.Modelos.Endereco;
+package com.SmartBooking.Modelos.Endereco.dto;
 
 import jakarta.validation.constraints.NotNull;
 
-public record CriacaoEndereco(
+public record CriacaoEnderecoDTO(
         String estado,
         @NotNull
         String cidade,
