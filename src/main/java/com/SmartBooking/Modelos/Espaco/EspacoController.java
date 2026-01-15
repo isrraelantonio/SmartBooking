@@ -1,7 +1,6 @@
-package com.SmartBooking.Controller;
+package com.SmartBooking.Modelos.Espaco;
 
-import com.SmartBooking.Modelos.Espaco.*;
-import com.SmartBooking.servicos.ServicosEspaco;
+import com.SmartBooking.Modelos.Espaco.dto.CriacaoEspacoDTO;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +13,12 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class EspacoController {
 
     @Autowired
-    public ServicosEspaco servicosEspaco;
+    public EspacoService servicosEspaco;
 
 
     @PostMapping
     @Transactional
-    public ResponseEntity cadastrarEspaco(@RequestBody @Valid CadastrarEspaco dados, UriComponentsBuilder uribilder) {
+    public ResponseEntity cadastrarEspaco(@RequestBody @Valid CriacaoEspacoDTO dados, UriComponentsBuilder uribilder) {
             var dto = servicosEspaco.criacaoEspaco(dados);
             var uri = uribilder.path("/espaco/{id}").buildAndExpand(dto.Id()).toUri();
             return ResponseEntity.created(uri).body(dto);

@@ -1,12 +1,7 @@
-package com.SmartBooking.Controller;
+package com.SmartBooking.Modelos.Endereco;
 
 
-import com.SmartBooking.Modelos.Endereco.CriacaoEndereco;
-import com.SmartBooking.Modelos.Endereco.DadosDetalhamentoEndereco;
-import com.SmartBooking.Modelos.Endereco.Endereco;
-import com.SmartBooking.Modelos.Endereco.EnderecoRepository;
-import com.SmartBooking.Modelos.Espaco.DadosDetalhamentoEspaco;
-import com.SmartBooking.servicos.ServicoEndereco;
+import com.SmartBooking.Modelos.Endereco.dto.CriacaoEnderecoDTO;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,18 +13,18 @@ import org.springframework.web.util.UriComponentsBuilder;
 @RequestMapping("endereco")
 public class EnderecoController{
     @Autowired
-    private ServicoEndereco servicoEndereco;
+    private EnderecoService servicoEndereco;
 
 
     @PostMapping
     @Transactional
-    public ResponseEntity cadastrarEndereco(@RequestBody @Valid CriacaoEndereco dados, UriComponentsBuilder uribilder){
+    public ResponseEntity cadastrarEndereco(@RequestBody @Valid CriacaoEnderecoDTO dados, UriComponentsBuilder uribilder){
         var dto = servicoEndereco.criarEndereco(dados);
         var uri = uribilder.path("/endereco/{id}").buildAndExpand(dto.id()).toUri();
         return ResponseEntity.created(uri).body(dto);
     }
 
-
+// Estou enfrentando problemas na atualização de reservas, algum id tem estado nulo
 
 
 }
