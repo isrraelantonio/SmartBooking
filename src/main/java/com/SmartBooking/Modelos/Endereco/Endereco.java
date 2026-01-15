@@ -1,9 +1,8 @@
 package com.SmartBooking.Modelos.Endereco;
 
 
+import com.SmartBooking.Modelos.Endereco.dto.CriacaoEnderecoDTO;
 import jakarta.persistence.*;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @Entity(name = "Endereco")
@@ -25,7 +24,7 @@ public class Endereco {
 
 
 
-    public Endereco(CriacaoEndereco dados) {
+    public Endereco(CriacaoEnderecoDTO dados) {
         this.estado = dados.estado();
         this.cidade = dados.cidade();
         this.rua = dados.rua();
@@ -34,7 +33,7 @@ public class Endereco {
     }
 
 
-    public void AtualizarEndereco(CriacaoEndereco dados){
+    public void AtualizarEndereco(CriacaoEnderecoDTO dados){
         if(dados.estado() != null){
             this.estado = dados.estado();
         }
