@@ -1,8 +1,7 @@
 package com.SmartBooking.Modelos.Espaco;
-import com.SmartBooking.Modelos.Endereco.DadosEndereco;
 import com.SmartBooking.Modelos.Endereco.Endereco;
+import com.SmartBooking.Modelos.Espaco.dto.CriacaoEspacoDTO;
 import jakarta.persistence.*;
-import jakarta.validation.Valid;
 import lombok.*;
 
 import java.time.LocalTime;
@@ -32,7 +31,7 @@ public class Espaco {
     private Boolean disponivel = true;
 
 
-    public Espaco(CadastrarEspaco dados, Endereco endereco){
+    public Espaco(CriacaoEspacoDTO dados, Endereco endereco){
         this.nome = dados.nome();
         this.email = dados.email();
         this.capacidade = dados.capacidade();
@@ -56,6 +55,20 @@ public class Espaco {
         this.disponivel = true;
 
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Espaco)) return false;
+        Espaco espaco = (Espaco) o;
+        return id != null && id.equals(espaco.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
+
 
 
 }
