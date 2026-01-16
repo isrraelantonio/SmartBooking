@@ -1,5 +1,15 @@
 package com.SmartBooking.Modelos.Reserva.Validators;
 
+
+
+
+/*
+ *Classe base para validadores de agendamento de reservas
+ *
+ * Centraliza o fluxo de execução e garante que as valiações só sejam executadas mediante condições mínima
+ *  A ordem de execução é controlada via {@link Order} presente nos validadores.
+ */
+
 public abstract class ValidadorBaseReserva  implements ValidadorAgendamentoReserva {
 
     @Override
