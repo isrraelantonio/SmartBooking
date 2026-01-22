@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -75,6 +76,7 @@ public class ReservaSevice {
     public String atualizarReservaAdm(AtualizacaoReservaAdmDTO dados, Long id) {
         Usuario usuario = null;
         Espaco espaco = null;
+        Reserva reserva;
 
         if (dados.usuarioId() != null) {
             verificarUsuario(dados.usuarioId());
@@ -86,10 +88,19 @@ public class ReservaSevice {
         }
 
 
-        var reserva = reservaRepositoy.existeReservaDesativadaNegada(id, List.of(
-               StatusReserva.PENDENTE,
-                StatusReserva.NEGADA,
-                StatusReserva.CONFIRMADO));
+        if (StatusReserva.NAO_COMPARECEU.equals(dados.status())){
+            reserva = reservaRepositoy.existeReservaDesativadaNegada(id, List.of(
+                    StatusReserva.CONFIRMADO));
+            if (reserva == null) {
+                throw new ValidacaoException("Reserva não encontrada ou status inválido");
+            }
+            reserva.marcarComoNaoCompareceu(LocalDateTime.now());
+        }else{
+            reserva = reservaRepositoy.existeReservaDesativadaNegada(id, List.of(
+                    StatusReserva.PENDENTE,
+                    StatusReserva.NEGADA,
+                    StatusReserva.CONFIRMADO));
+        }
 
         if (reserva != null) {
             validarReserva(dados);
@@ -102,6 +113,7 @@ public class ReservaSevice {
 
 
     }
+
 
     public String atualizarReservaUsuario(AtualizacaoReservaUsuarioDTO dados, Long id) {
         Espaco espaco = null;
@@ -126,6 +138,7 @@ public class ReservaSevice {
 
 
     }
+
 
     @Scheduled(fixedRate = 300000)
     @Transactional
