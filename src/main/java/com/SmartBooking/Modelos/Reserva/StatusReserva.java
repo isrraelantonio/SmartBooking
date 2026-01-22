@@ -9,7 +9,8 @@ public enum StatusReserva {
     PENDENTE,
     CANCELADA,
     FINALIZADA, // Reserva confirmada cujo período já terminou
-    NEGADA;
+    NEGADA,
+    NAO_COMPARECEU;
 
 
     public static StatusReserva fromString(String valor) {

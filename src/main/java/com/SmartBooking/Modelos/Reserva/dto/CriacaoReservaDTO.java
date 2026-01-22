@@ -29,4 +29,9 @@ public record CriacaoReservaDTO(
         public Long getEspacoId() {
                 return espacoId;
         }
+
+        @Override
+        public String getStatus() {
+                return "";
+        }
 }

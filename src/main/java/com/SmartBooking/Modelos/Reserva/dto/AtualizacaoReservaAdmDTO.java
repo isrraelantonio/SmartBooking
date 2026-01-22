@@ -28,4 +28,9 @@ public record AtualizacaoReservaAdmDTO(
     public Long getEspacoId() {
         return espacoId;
     }
+
+    @Override
+    public String getStatus() {
+        return "";
+    }
 }
