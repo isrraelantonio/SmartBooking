@@ -5,6 +5,7 @@ import com.SmartBooking.Modelos.Reserva.dto.AtualizacaoReservaAdmDTO;
 import com.SmartBooking.Modelos.Reserva.dto.AtualizacaoReservaUsuarioDTO;
 import com.SmartBooking.Modelos.Reserva.dto.CriacaoReservaDTO;
 import com.SmartBooking.Modelos.Usuario.Usuario;
+import com.SmartBooking.exception.ValidacaoException;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -78,6 +79,16 @@ public class Reserva {
             this.espaco = espaco;
         }
 
+    }
+
+    public void marcarComoNaoCompareceu(LocalDateTime agora) {
+        if (agora.isBefore(this.fim)) {
+            throw new ValidacaoException(
+                    "Não é possível marcar como não compareceu antes do término da reserva"
+            );
+        }
+
+        this.status = StatusReserva.NAO_COMPARECEU;
     }
 
     public void finalizar() {
