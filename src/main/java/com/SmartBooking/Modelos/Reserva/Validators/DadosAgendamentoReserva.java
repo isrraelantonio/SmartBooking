@@ -14,5 +14,6 @@ public interface DadosAgendamentoReserva {
     LocalDateTime getInicio();
     LocalDateTime getFim();
     Long getEspacoId();
+    String getStatus();
 
 }
