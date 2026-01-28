@@ -3,6 +3,8 @@ package com.SmartBooking.Modelos.Reserva.Validators;
 
 import com.SmartBooking.exception.ValidacaoException;
 import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
+
 /**
  * Validador responsável por garantir a consistência do intervalo de tempo
  * informado em operações de criação ou atualização de reservas.
@@ -44,15 +46,17 @@ import org.springframework.core.annotation.Order;
  */
 
 @Order(1)
-public class ValidadorIntervaloCompleto extends ValidadorBaseReserva{
+@Component
+public class ValidadorIntervaloCompleto extends ValidadorBaseReserva {
     @Override
     public void executarValidacao(DadosAgendamentoReserva dados) {
-        var inicio = dados.getInicio();
-        var fim = dados.getFim();
 
-        if ((inicio == null && fim != null) || (inicio != null && fim == null)) {
             throw new ValidacaoException("Para alterar o horário da reserva, informe data/hora inicial e final.");
+    }
 
-        }
+    @Override
+    protected boolean  deveExecutar(DadosAgendamentoReserva dados) {
+        System.out.println("Obrigado meu Deus.");
+        return dados.getInicio() == null || dados.getFim() == null;
     }
 }
