@@ -24,9 +24,10 @@ public abstract class ValidadorBaseReserva  implements ValidadorAgendamentoReser
     protected abstract void executarValidacao(DadosAgendamentoReserva dados);
 
 
-    protected boolean deveExecutar(DadosAgendamentoReserva dados) {
-        return dados.getInicio() != null || dados.getFim() != null;
+    protected  boolean deveExecutar(DadosAgendamentoReserva dados){
+        return dados.getInicio() != null && dados.getFim() != null;
     }
+
 
 
 
