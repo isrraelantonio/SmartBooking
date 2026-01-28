@@ -33,4 +33,7 @@ public record AtualizacaoReservaAdmDTO(
     public String getStatus() {
         return "";
     }
+
+
+
 }
