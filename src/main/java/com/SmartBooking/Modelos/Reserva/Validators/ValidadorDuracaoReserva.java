@@ -37,7 +37,7 @@ public class ValidadorDuracaoReserva extends  ValidadorBaseReserva{
 
     @Override
     public void executarValidacao(DadosAgendamentoReserva dados){
-        if (dados.getInicio() != null && dados.getFim() != null) {
+
             var duracao = Duration.between(dados.getInicio(), dados.getFim());
 
             if (duracao.toMinutes() < 30) {
@@ -46,7 +46,6 @@ public class ValidadorDuracaoReserva extends  ValidadorBaseReserva{
             if (duracao.toHours() > 8) {
                 throw new ValidacaoException("O tempo máximo para a locação é de 8 horas.");
             }
-        }
 
     }
 

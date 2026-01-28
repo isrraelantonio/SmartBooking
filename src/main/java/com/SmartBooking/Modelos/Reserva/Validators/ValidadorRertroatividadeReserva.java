@@ -12,12 +12,10 @@ public class ValidadorRertroatividadeReserva extends ValidadorBaseReserva {
 
     @Override
     public void executarValidacao(DadosAgendamentoReserva dados){
-        if(dados.getInicio() != null){
             var dataDehoje = LocalDateTime.now();
             if(dados.getInicio().isBefore(dataDehoje)){
                 throw new ValidacaoException("Insira uma data válida");
             }
-        }
 
 
     }
