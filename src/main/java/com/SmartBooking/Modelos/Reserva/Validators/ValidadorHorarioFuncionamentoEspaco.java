@@ -34,5 +34,5 @@ public class ValidadorHorarioFuncionamentoEspaco extends ValidadorBaseReserva {
 
 
     }
-  
+
 }
