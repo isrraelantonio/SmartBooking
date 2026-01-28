@@ -29,17 +29,15 @@ public class ValidadorDataInicioFimReserva extends ValidadorBaseReserva {
         var fim = dados.getFim();
 
 
-        if (dados.getFim().isBefore(dados.getInicio())) {
+        if (fim.isBefore(inicio)) {
             throw new ValidacaoException("A data final não pode ser anterior a data inicial");
         }
 
         var dataDeAgora = LocalDateTime.now();
 
-            if (dados.getInicio().isBefore(dataDeAgora.plusHours(HORAS_MINIMAS_ANTECEDENCIA))) {
+            if (inicio.isBefore(dataDeAgora.plusHours(HORAS_MINIMAS_ANTECEDENCIA))) {
             throw new ValidacaoException("O agendamento deve ocorrer com pelo menos 4 horas de antecedência.");
         }
-
-
 
     }
 
