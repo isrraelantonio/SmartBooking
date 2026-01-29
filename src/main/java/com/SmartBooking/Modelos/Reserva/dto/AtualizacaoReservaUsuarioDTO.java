@@ -9,20 +9,20 @@ public record AtualizacaoReservaUsuarioDTO(
          LocalDateTime inicio,
          LocalDateTime fim
 
+
 ) implements DadosAgendamentoReserva {
     @Override
-    public LocalDateTime getInicio() {
-        return inicio;
+    public LocalDateTime getInicio() { return this.inicio;
     }
 
     @Override
     public LocalDateTime getFim() {
-        return fim;
+        return this.fim;
     }
 
     @Override
     public Long getEspacoId() {
-        return espacoId;
+        return this.espacoId;
     }
 
     @Override

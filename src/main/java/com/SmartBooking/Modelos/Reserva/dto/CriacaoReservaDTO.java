@@ -17,17 +17,17 @@ public record CriacaoReservaDTO(
 )implements DadosAgendamentoReserva {
         @Override
         public LocalDateTime getInicio() {
-                return inicio;
+                return this.inicio;
         }
 
         @Override
         public LocalDateTime getFim() {
-                return fim;
+                return this.fim;
         }
 
         @Override
         public Long getEspacoId() {
-                return espacoId;
+                return this.espacoId;
         }
 
         @Override

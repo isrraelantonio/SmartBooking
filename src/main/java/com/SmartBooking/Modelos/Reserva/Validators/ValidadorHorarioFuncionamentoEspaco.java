@@ -32,7 +32,6 @@ public class ValidadorHorarioFuncionamentoEspaco extends ValidadorBaseReserva {
             throw new ValidacaoException("Esse espaco não existe em nosso banco de dados");
         }
 
-
     }
 
 }
