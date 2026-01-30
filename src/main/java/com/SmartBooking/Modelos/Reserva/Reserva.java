@@ -78,6 +78,9 @@ public class Reserva {
         if (espaco != null && !espaco.equals(getEspaco())) {
             this.espaco = espaco;
         }
+        if(dados.status() != null){
+            this.status = StatusReserva.fromString(dados.status());
+        }
 
     }
 

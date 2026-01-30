@@ -7,8 +7,8 @@ import java.time.LocalDateTime;
 public record AtualizacaoReservaUsuarioDTO(
          Long espacoId,
          LocalDateTime inicio,
-         LocalDateTime fim
-
+         LocalDateTime fim,
+         String status
 
 ) implements DadosAgendamentoReserva {
     @Override
@@ -27,6 +27,6 @@ public record AtualizacaoReservaUsuarioDTO(
 
     @Override
     public String getStatus() {
-        return "";
+        return this.status;
     }
 }
