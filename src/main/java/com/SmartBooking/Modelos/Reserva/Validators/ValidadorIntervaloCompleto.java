@@ -57,6 +57,6 @@ public class ValidadorIntervaloCompleto extends ValidadorBaseReserva {
     @Override
     protected boolean  deveExecutar(DadosAgendamentoReserva dados) {
         System.out.println("Obrigado meu Deus.");
-        return dados.getInicio() == null || dados.getFim() == null;
+        return (dados.getInicio() != null && dados.getFim() == null) ||  (dados.getInicio() == null && dados.getFim() != null);
     }
 }
