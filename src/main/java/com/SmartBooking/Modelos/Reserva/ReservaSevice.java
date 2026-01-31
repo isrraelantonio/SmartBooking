@@ -118,6 +118,7 @@ public class ReservaSevice {
     public String atualizarReservaUsuario(AtualizacaoReservaUsuarioDTO dados, Long id) {
         Espaco espaco = null;
 
+
         if (dados.espacoId() != null) {
             verificarEspaco(dados.espacoId());
             espaco = espacoRepository.existeEspaco(dados.espacoId());
@@ -128,10 +129,24 @@ public class ReservaSevice {
                 StatusReserva.NEGADA));
 
         if (reserva != null) {
+
+            if(!StatusReserva.CANCELADA.name().equals(dados.status())){
+                throw new ValidacaoException("Operação inválida: o status informado não é permitido. Status esperado: CANCELADA.");
+            }
+
+            LocalDateTime dataLimiteCancelamento = reserva.getInicio().minusHours(2);
+            LocalDateTime hoje = LocalDateTime.now();
+
+            if(hoje.isAfter(dataLimiteCancelamento)){
+                throw  new ValidacaoException("As reservas so podem ser canceladas com 2 horas de antecedência");
+            }
+
+
             validarReserva(dados);
             reserva.atualizarReservaUsuario(dados, espaco);
             reservaRepositoy.save(reserva);
             return "Reserva atualizada.";
+            
         } else {
             return "Essa reserva já esta confirmada ou não existe em nosso banco de dados.";
         }
