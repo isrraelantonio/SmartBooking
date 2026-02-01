@@ -4,9 +4,13 @@ package com.SmartBooking.Modelos.Reserva;
 import com.SmartBooking.Modelos.Reserva.dto.AtualizacaoReservaAdmDTO;
 import com.SmartBooking.Modelos.Reserva.dto.AtualizacaoReservaUsuarioDTO;
 import com.SmartBooking.Modelos.Reserva.dto.CriacaoReservaDTO;
+import com.SmartBooking.Modelos.Reserva.dto.ReservaPaginadaDTO;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -39,6 +43,20 @@ public class ReservaController {
         var dto = servicoReserva.atualizarReservaUsuario(dados, id);
         return ResponseEntity.ok(dto);
     }
-    
+
+    @GetMapping("/{id}")
+    @Transactional
+    public ResponseEntity <Page<ReservaPaginadaDTO>> reservasDoUsuario(@PathVariable Long id, @PageableDefault(size = 3, sort = "inicio") Pageable paginacao){
+        var page =  servicoReserva.reservasDoUsuario(id, paginacao);
+        return ResponseEntity.ok(page);
+    }
+
+    @GetMapping
+    @Transactional
+    public ResponseEntity <Page<ReservaPaginadaDTO>> reservasDoUsuario(@PageableDefault(size = 3, sort = "inicio") Pageable paginacao){
+        var page =  servicoReserva.listaDeReserva(paginacao);
+        return ResponseEntity.ok(page);
+    }
+
 
 }
