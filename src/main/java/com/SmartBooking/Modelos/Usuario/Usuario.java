@@ -31,10 +31,6 @@ public class Usuario {
     private Boolean ativo = true;
 
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Reserva> reservas = new ArrayList<>();
-
-
     public Usuario(@Valid DadosCriacaoUsuarioDTO dados) {
         this.nome = dados.nome();
         this.email = dados.email();
