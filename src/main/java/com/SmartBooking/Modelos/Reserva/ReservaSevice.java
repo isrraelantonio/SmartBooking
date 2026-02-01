@@ -5,15 +5,14 @@ import com.SmartBooking.Modelos.Espaco.Espaco;
 import com.SmartBooking.Modelos.Espaco.EspacoRepository;
 import com.SmartBooking.Modelos.Reserva.Validators.DadosAgendamentoReserva;
 import com.SmartBooking.Modelos.Reserva.Validators.ValidadorAgendamentoReserva;
-import com.SmartBooking.Modelos.Reserva.dto.AtualizacaoReservaAdmDTO;
-import com.SmartBooking.Modelos.Reserva.dto.AtualizacaoReservaUsuarioDTO;
-import com.SmartBooking.Modelos.Reserva.dto.CriacaoReservaDTO;
-import com.SmartBooking.Modelos.Reserva.dto.DadosDetalhamentoReservaDTO;
+import com.SmartBooking.Modelos.Reserva.dto.*;
 import com.SmartBooking.Modelos.Usuario.Usuario;
 import com.SmartBooking.Modelos.Usuario.UsuarioRepository;
 import com.SmartBooking.exception.ValidacaoException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -153,6 +152,19 @@ public class ReservaSevice {
 
 
     }
+
+    public Page reservasDoUsuario(Long id, Pageable paginacao){
+        var   page = reservaRepositoy.reservasDoUsuario(id, paginacao).
+                map(ReservaPaginadaDTO::new);
+        return page;
+    }
+
+    public Page listaDeReserva(Pageable paginacao){
+        var   page = reservaRepositoy.findAll(paginacao).
+                map(ReservaPaginadaDTO::new);
+        return page;
+    }
+
 
 
     @Scheduled(fixedRate = 300000)
