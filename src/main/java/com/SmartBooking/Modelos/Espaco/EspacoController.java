@@ -26,7 +26,7 @@ public class EspacoController {
 
     @DeleteMapping("/{id}")
     @Transactional
-    public ResponseEntity excluirUsuario(@PathVariable Long id) {
+    public ResponseEntity excluirEspaco(@PathVariable Long id) {
         servicosEspaco.desativarEspaco(id);
         return ResponseEntity.noContent().build();
     }
@@ -34,7 +34,7 @@ public class EspacoController {
 
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity ativarespaco(@PathVariable Long id) {
+    public ResponseEntity ativarEspaco(@PathVariable Long id) {
         servicosEspaco.ativarEspaco(id);
         return ResponseEntity.noContent().build();
     }
