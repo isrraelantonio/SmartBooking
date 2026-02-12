@@ -2,6 +2,7 @@ package com.SmartBooking.security;
 
 
 import com.SmartBooking.Modelos.Usuario.UsuarioRepository;
+import com.SmartBooking.exception.ValidacaoException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -32,7 +33,9 @@ public class SecurityFilter extends OncePerRequestFilter {
 
         if (tokenJWT != null){
             var subject = tokenService.getsubject(tokenJWT);
-            var usuario = repository.findBySenha(subject);
+            var usuario = repository.findByEmail(subject);
+//            var usuario = repository.findById(Long.valueOf(subject))
+//                    .orElseThrow(() -> new ValidacaoException("Usuário não encontrado"));
 
             var authentication = new UsernamePasswordAuthenticationToken(usuario, null, usuario.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -63,10 +66,10 @@ public class SecurityFilter extends OncePerRequestFilter {
      */
 //    private String recuperarToken(HttpServletRequest request) {
 //        var autorizationHeader = request.getHeader("Authorization");
-//        if(autorizationHeader != null){
+//        if (autorizationHeader != null) {
 //            return autorizationHeader.replace("Bearer ", "");
 //        }
-//        return  null;
-
-
+//        return null;
+//
+//    }
 }
