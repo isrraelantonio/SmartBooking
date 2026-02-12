@@ -28,7 +28,7 @@ public class TokenService {
             var algoritmo = Algorithm.HMAC256(secret);
             return JWT.create()
                     .withIssuer("API SmartBooking")
-                    .withSubject(usuario.getEmail())
+                    .withSubject(usuario.getUsername())
                     .withExpiresAt(dataExpiracao())
                     .sign(algoritmo);
         } catch (JWTCreationException exception){
@@ -50,13 +50,12 @@ public class TokenService {
         }
     }
 
-//    private Instant dataExpiracao() {
-//        return LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("-03:00"));
-//    }
-
     private Instant dataExpiracao() {
         return Instant.now().plus(2, ChronoUnit.HOURS);
     }
 
+//    private Instant dataExpiracao() {
+//        return LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("-03:00"));
+//    }
 
 }
