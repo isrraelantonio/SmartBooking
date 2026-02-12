@@ -5,6 +5,7 @@ import com.SmartBooking.Modelos.Usuario.dto.DadosCriacaoUsuarioDTO;
 import com.SmartBooking.Modelos.Usuario.dto.DadosDetalhamentoUsuarioDTO;
 import com.SmartBooking.exception.ValidacaoException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,11 +14,15 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     public DadosDetalhamentoUsuarioDTO criarUsuario(DadosCriacaoUsuarioDTO dados){
         if (usuarioRepository.existsByEmail(dados.email())) {
             throw new ValidacaoException("Esse E-mail já está cadastrado");
         } else {
             var usuario = new Usuario(dados);
+            usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
             usuarioRepository.save(usuario);
             return new DadosDetalhamentoUsuarioDTO(usuario);
 
