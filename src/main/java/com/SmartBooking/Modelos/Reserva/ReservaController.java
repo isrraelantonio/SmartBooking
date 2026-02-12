@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -31,6 +32,7 @@ public class ReservaController {
     }
 
     @PatchMapping("adm/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     @Transactional
     public ResponseEntity atualizarReservaAdm( @PathVariable Long id, @RequestBody AtualizacaoReservaAdmDTO dados){
         var dto = servicoReserva.atualizarReservaAdm(dados, id);
@@ -52,8 +54,9 @@ public class ReservaController {
     }
 
     @GetMapping
+    @PreAuthorize("hasRole('ADMIN')")
     @Transactional
-    public ResponseEntity <Page<ReservaPaginadaDTO>> reservasDoUsuario(@PageableDefault(size = 3, sort = "inicio") Pageable paginacao){
+    public ResponseEntity <Page<ReservaPaginadaDTO>> todasReservas(@PageableDefault(size = 3, sort = "inicio") Pageable paginacao){
         var page =  servicoReserva.listaDeReserva(paginacao);
         return ResponseEntity.ok(page);
     }
