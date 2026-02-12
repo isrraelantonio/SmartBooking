@@ -6,6 +6,7 @@ import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -17,6 +18,7 @@ public class EnderecoController{
 
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     @Transactional
     public ResponseEntity cadastrarEndereco(@RequestBody @Valid CriacaoEnderecoDTO dados, UriComponentsBuilder uribilder){
         var dto = servicoEndereco.criarEndereco(dados);

@@ -5,6 +5,7 @@ import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -17,6 +18,7 @@ public class EspacoController {
 
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     @Transactional
     public ResponseEntity cadastrarEspaco(@RequestBody @Valid CriacaoEspacoDTO dados, UriComponentsBuilder uribilder) {
             var dto = servicosEspaco.criacaoEspaco(dados);
@@ -25,6 +27,7 @@ public class EspacoController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     @Transactional
     public ResponseEntity excluirEspaco(@PathVariable Long id) {
         servicosEspaco.desativarEspaco(id);
@@ -33,6 +36,7 @@ public class EspacoController {
 
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     @Transactional
     public ResponseEntity ativarEspaco(@PathVariable Long id) {
         servicosEspaco.ativarEspaco(id);
