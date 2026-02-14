@@ -19,7 +19,7 @@ public class ValidadorHorarioFuncionamentoEspaco extends ValidadorBaseReserva {
 
     @Override
     public void executarValidacao(DadosAgendamentoReserva dados) {
-        var espaco = espacoRepository.existeEspaco(dados.getEspacoId());
+        var espaco = espacoRepository.findByIdAndDisponivelTrue(dados.getEspacoId());
 
         if(espaco != null){
             if(dados.getInicio().toLocalTime().isBefore(espaco.getAbertura()) || dados.getInicio().toLocalTime().isAfter(espaco.getFechamento())){

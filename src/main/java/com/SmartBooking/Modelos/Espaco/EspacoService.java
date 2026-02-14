@@ -37,7 +37,7 @@ public class EspacoService {
 
 
     public void desativarEspaco(long id) {
-        var espaco = espacoRepository.existeEspaco(id);
+        var espaco = espacoRepository.findByIdAndDisponivelTrue(id);
         if(espaco != null){
             espaco.desativarespaco();
             espacoRepository.save(espaco);
@@ -47,7 +47,7 @@ public class EspacoService {
     }
 
     public void ativarEspaco(long id) {
-        var espaco = espacoRepository.existeEspacoDesativado(id);
+        var espaco = espacoRepository.findByIdAndDisponivelFalse(id);
         if(espaco != null){
             espaco.ativarespaco();
             espacoRepository.save(espaco);

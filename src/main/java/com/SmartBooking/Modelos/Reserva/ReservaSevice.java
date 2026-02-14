@@ -43,7 +43,7 @@ public class ReservaSevice {
         validarReserva(dados);
 
         var usuario = usuarioRepository.getReferenceById(dados.usuarioId());
-        var espaco = espacoRepository.existeEspaco(dados.espacoId());
+        var espaco = espacoRepository.findByIdAndDisponivelTrue(dados.espacoId());
         var reserva = new Reserva(dados, usuario, espaco);
         reservaRepositoy.save(reserva);
 
@@ -83,7 +83,7 @@ public class ReservaSevice {
         }
         if (dados.espacoId() != null) {
             verificarEspaco(dados.espacoId());
-            espaco = espacoRepository.existeEspaco(dados.espacoId());
+            espaco = espacoRepository.findByIdAndDisponivelTrue(dados.espacoId());
         }
 
 
@@ -120,7 +120,7 @@ public class ReservaSevice {
 
         if (dados.espacoId() != null) {
             verificarEspaco(dados.espacoId());
-            espaco = espacoRepository.existeEspaco(dados.espacoId());
+            espaco = espacoRepository.findByIdAndDisponivelTrue(dados.espacoId());
         }
 
         var reserva = reservaRepositoy.existeReservaDesativadaNegada(id,List.of(

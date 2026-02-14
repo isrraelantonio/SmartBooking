@@ -7,10 +7,9 @@ import org.springframework.data.jpa.repository.Query;
 public interface EspacoRepository extends JpaRepository<Espaco, Long> {
     boolean existsByEmail(@NotNull String email);
 
-    @Query("SELECT e FROM Espaco e WHERE e.id = :id AND e.disponivel = true")
-    Espaco existeEspaco(Long id);
+    Espaco findByIdAndDisponivelTrue(Long id);
 
-    @Query("SELECT e FROM Espaco e WHERE e.id = :id AND e.disponivel = false")
-    Espaco existeEspacoDesativado(@NotNull Long id);
+
+    Espaco findByIdAndDisponivelFalse(@NotNull Long id);
 
 }
