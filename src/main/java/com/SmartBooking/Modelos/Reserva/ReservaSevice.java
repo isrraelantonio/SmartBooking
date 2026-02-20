@@ -16,7 +16,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -88,14 +87,14 @@ public class ReservaSevice {
 
 
         if (StatusReserva.NAO_COMPARECEU.equals(dados.status())){
-            reserva = reservaRepositoy.existeReservaDesativadaNegada(id, List.of(
+            reserva = reservaRepositoy.existeReservaStatus(id, List.of(
                     StatusReserva.CONFIRMADO));
             if (reserva == null) {
                 throw new ValidacaoException("Reserva não encontrada ou status inválido");
             }
             reserva.marcarComoNaoCompareceu(LocalDateTime.now());
         }else{
-            reserva = reservaRepositoy.existeReservaDesativadaNegada(id, List.of(
+            reserva = reservaRepositoy.existeReservaStatus(id, List.of(
                     StatusReserva.PENDENTE,
                     StatusReserva.NEGADA,
                     StatusReserva.CONFIRMADO));
@@ -123,7 +122,7 @@ public class ReservaSevice {
             espaco = espacoRepository.findByIdAndDisponivelTrue(dados.espacoId());
         }
 
-        var reserva = reservaRepositoy.existeReservaDesativadaNegada(id,List.of(
+        var reserva = reservaRepositoy.existeReservaStatus(id,List.of(
                 StatusReserva.PENDENTE,
                 StatusReserva.NEGADA));
 
