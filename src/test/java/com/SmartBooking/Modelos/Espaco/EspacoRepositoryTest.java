@@ -109,7 +109,7 @@ class EspacoRepositoryTest {
     void findByIdAndDisponivelFalse3() {
 
         // Arrange
-        Espaco espaco  = criarEspacoPadrao(false);
+        Espaco espaco  = criarEspacoPadrao(false  );
 
         // Act
         Espaco resultado = repository.findByIdAndDisponivelFalse(600l);
